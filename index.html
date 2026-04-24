@@ -1,0 +1,685 @@
+<!doctype html>
+<html lang="en" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Partyhouse And Eventplanner | Premium Event Planning in Hyderabad</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+  <script>
+tailwind.config={theme:{extend:{colors:{accent:'#D4A853',darkBg:'#0F0F0F',surface:'#1A1A1A'}}}}
+</script>
+  <style>
+html, body { height: 100%; margin: 0; scroll-behavior: smooth; }
+* { box-sizing: border-box; }
+body { font-family: 'Inter', sans-serif; }
+.font-display { font-family: 'Playfair Display', serif; font-weight: 700; }
+.fade-up { opacity: 0; transform: translateY(20px); transition: all 0.6s ease; }
+.fade-up.visible { opacity: 1; transform: translateY(0); }
+@keyframes slideIn { from { opacity: 0; transform: translateX(-30px); } to { opacity: 1; transform: translateX(0); } }
+@keyframes fadeInScale { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+.nav-link { position: relative; transition: color 0.3s; }
+.nav-link::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 0; height: 2px; background: #D4A853; transition: width 0.3s; }
+.nav-link:hover::after { width: 100%; }
+.service-card { transition: all 0.3s ease; border: 1px solid rgba(212, 168, 83, 0.1); }
+.service-card:hover { transform: translateY(-8px); border-color: #D4A853; box-shadow: 0 12px 30px rgba(212, 168, 83, 0.15); }
+.gallery-img { cursor: pointer; transition: transform 0.3s, filter 0.3s; }
+.gallery-img:hover { transform: scale(1.05); filter: brightness(1.1); }
+.lightbox { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.98); z-index: 9999; display: none; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s; backdrop-filter: blur(4px); }
+.lightbox.active { display: flex; opacity: 1; }
+.lightbox img { max-width: 90%; max-height: 85%; object-fit: contain; border-radius: 8px; }
+.lightbox-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(212, 168, 83, 0.2); border: none; color: #D4A853; font-size: 2rem; padding: 12px 18px; cursor: pointer; border-radius: 50%; transition: background 0.3s; }
+.lightbox-btn:hover { background: rgba(212, 168, 83, 0.5); }
+.btn-primary { background: linear-gradient(135deg, #D4A853, #f0d078); color: #0F0F0F; font-weight: 600; transition: all 0.3s; }
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(212, 168, 83, 0.3); }
+.btn-secondary { border: 2px solid #D4A853; color: #D4A853; background: transparent; transition: all 0.3s; }
+.btn-secondary:hover { background: #D4A853; color: #0F0F0F; }
+.stat-box { text-align: center; animation: fadeInScale 0.6s ease backwards; }
+.whatsapp-btn { position: fixed; bottom: 24px; right: 24px; z-index: 1000; width: 60px; height: 60px; border-radius: 50%; background: #25D366; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4); transition: all 0.3s; cursor: pointer; }
+.whatsapp-btn:hover { transform: scale(1.1); }
+.pulse { animation: pulse 2s ease-in-out infinite; }
+@keyframes pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(212, 168, 83, 0.3); } 50% { box-shadow: 0 0 0 10px rgba(212, 168, 83, 0); } }
+@media (max-width: 768px) {
+  .nav-link::after { display: none; }
+  .service-card { margin-bottom: 16px; }
+}
+</style>
+  <style>body { box-sizing: border-box; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full bg-darkBg text-white overflow-auto">
+  <!-- Navigation -->
+  <nav id="mainNav" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300" style="background: rgba(15, 15, 15, 0.8); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(212, 168, 83, 0.1);">
+   <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
+    <a href="#hero" class="flex items-center gap-2 z-50"> <span class="text-2xl sm:text-3xl">🎉</span> <span id="navBrand" class="font-display text-lg sm:text-xl" style="color: #D4A853;">Partyhouse</span> </a>
+    <div class="hidden md:flex items-center gap-8">
+     <a href="#services" class="nav-link text-gray-300 hover:text-accent text-sm">Services</a> <a href="#gallery" class="nav-link text-gray-300 hover:text-accent text-sm">Gallery</a> <a href="#why" class="nav-link text-gray-300 hover:text-accent text-sm">Why Us</a> <a href="#reviews" class="nav-link text-gray-300 hover:text-accent text-sm">Reviews</a> <a href="#contact" class="btn-primary px-6 py-2 rounded-lg text-sm">Book Now</a>
+    </div><button id="mobileMenuBtn" class="md:hidden text-accent p-2"><i data-lucide="menu" style="width: 24px; height: 24px;"></i></button>
+   </div><!-- Mobile Menu -->
+   <div id="mobileMenu" class="hidden md:hidden bg-surface border-t border-accent/10 px-4 py-3 space-y-2">
+    <a href="#services" class="block text-gray-300 py-2 text-sm hover:text-accent transition">Services</a> <a href="#gallery" class="block text-gray-300 py-2 text-sm hover:text-accent transition">Gallery</a> <a href="#why" class="block text-gray-300 py-2 text-sm hover:text-accent transition">Why Us</a> <a href="#reviews" class="block text-gray-300 py-2 text-sm hover:text-accent transition">Reviews</a> <a href="#contact" class="block btn-primary px-6 py-2 rounded-lg text-sm text-center">Book Now</a>
+   </div>
+  </nav><!-- Hero Section -->
+  <section id="hero" class="relative w-full min-h-screen flex items-center justify-center pt-20 px-4 sm:px-6 overflow-hidden">
+   <div class="absolute inset-0" style="background: linear-gradient(135deg, rgba(212, 168, 83, 0.05) 0%, rgba(212, 168, 83, 0) 100%);"></div>
+   <div class="absolute top-20 left-10 w-72 h-72 bg-accent/5 rounded-full blur-3xl"></div>
+   <div class="absolute bottom-20 right-10 w-72 h-72 bg-accent/3 rounded-full blur-3xl"></div>
+   <div class="relative z-10 w-full max-w-6xl">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 items-center">
+     <!-- Left Content -->
+     <div class="fade-up space-y-6">
+      <div>
+       <p class="text-accent text-sm sm:text-base font-semibold uppercase tracking-wider">🎉 Welcome to Celebration</p>
+       <h1 id="heroTitle" class="font-display text-4xl sm:text-5xl lg:text-6xl leading-tight mt-2" style="color: #D4A853;">Partyhouse And Eventplanner</h1>
+       <p id="heroSubtitle" class="text-base sm:text-lg text-gray-300 mt-4 max-w-md">Make Every Celebration Memorable</p>
+      </div>
+      <div class="flex flex-col sm:flex-row gap-4 pt-6">
+       <a href="#contact" class="btn-primary px-6 sm:px-8 py-3 rounded-lg font-semibold text-sm sm:text-base inline-flex items-center justify-center gap-2"> <i data-lucide="phone" style="width: 20px; height: 20px;"></i> Book Your Event </a> <a href="#services" class="btn-secondary px-6 sm:px-8 py-3 rounded-lg font-semibold text-sm sm:text-base inline-flex items-center justify-center gap-2"> <i data-lucide="explore" style="width: 20px; height: 20px;"></i> Explore </a>
+      </div>
+      <div class="space-y-2 pt-6 border-t border-accent/20">
+       <div class="flex items-center gap-2 text-gray-400 text-sm">
+        <i data-lucide="map-pin" style="width: 18px; height: 18px; color: #D4A853;"></i> <span id="heroAddress">Kismatpur Rd, Bandlaguda Jagir, Hyderabad</span>
+       </div>
+       <div class="flex items-center gap-2 text-gray-400 text-sm">
+        <i data-lucide="phone" style="width: 18px; height: 18px; color: #D4A853;"></i> <span id="heroPhone"><span class="phoneNum">7075785481</span> (WhatsApp Available)</span>
+       </div>
+      </div>
+     </div><!-- Right: Quick Booking Form -->
+     <div class="fade-up hidden lg:block">
+      <div class="relative p-8" style="background: linear-gradient(135deg, rgba(212, 168, 83, 0.1), rgba(212, 168, 83, 0.05)); border: 1px solid rgba(212, 168, 83, 0.2); border-radius: 16px; backdrop-filter: blur(10px);">
+       <h3 class="font-display text-2xl mb-6" style="color: #D4A853;">Quick Inquiry</h3>
+       <form id="heroForm" class="space-y-4">
+        <input type="text" id="heroName" placeholder="Your Name" required class="w-full px-4 py-3 rounded-lg bg-surface/50 border border-accent/20 text-white placeholder-gray-500 focus:outline-none focus:border-accent transition text-sm"> <input type="tel" id="heroPhone2" placeholder="Phone Number" required class="w-full px-4 py-3 rounded-lg bg-surface/50 border border-accent/20 text-white placeholder-gray-500 focus:outline-none focus:border-accent transition text-sm"> <select id="heroEvent" required class="w-full px-4 py-3 rounded-lg bg-surface/50 border border-accent/20 text-white focus:outline-none focus:border-accent transition text-sm"> <option value="" style="color: #999;">Select Event Type</option> <option style="color: white;">Birthday Party</option> <option style="color: white;">Wedding / Engagement</option> <option style="color: white;">Corporate Event</option> <option style="color: white;">Private Party</option> <option style="color: white;">Decoration Only</option> <option style="color: white;">Other</option> </select> <input type="date" id="heroDate" class="w-full px-4 py-3 rounded-lg bg-surface/50 border border-accent/20 text-white focus:outline-none focus:border-accent transition text-sm"> <button type="submit" class="w-full btn-primary py-3 rounded-lg font-semibold text-sm transition">Send to WhatsApp 📩</button>
+       </form>
+       <p class="text-xs text-gray-400 text-center mt-4">✓ We'll contact you within 1 hour</p>
+      </div>
+     </div>
+    </div>
+   </div>
+  </section><!-- About Section -->
+  <section class="w-full py-16 sm:py-20 px-4 sm:px-6" style="background: linear-gradient(180deg, rgba(212, 168, 83, 0.03), transparent);">
+   <div class="max-w-4xl mx-auto text-center fade-up">
+    <h2 class="font-display text-3xl sm:text-4xl mb-4" style="color: #D4A853;">Why Partyhouse?</h2>
+    <p class="text-gray-300 text-base sm:text-lg leading-relaxed">We transform ordinary moments into extraordinary memories. With 8+ years of experience, creative designs, and dedicated professionals, we make your celebration stress-free and absolutely unforgettable.</p>
+   </div>
+  </section><!-- Services Section -->
+  <section id="services" class="w-full py-16 sm:py-20 px-4 sm:px-6">
+   <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-12 fade-up">
+     <h2 class="font-display text-3xl sm:text-4xl mb-2" style="color: #D4A853;">🎈 Our Services</h2>
+     <p class="text-gray-400 text-sm sm:text-base">Everything you need for a perfect celebration</p>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+     <div class="service-card bg-surface rounded-xl p-6 fade-up">
+      <div class="text-4xl mb-4">
+       🎂
+      </div>
+      <h3 class="font-display text-xl mb-2" style="color: #D4A853;">Birthday Parties</h3>
+      <p class="text-gray-400 text-sm">Creative themes, decorations, and fun arrangements for all ages.</p>
+     </div>
+     <div class="service-card bg-surface rounded-xl p-6 fade-up">
+      <div class="text-4xl mb-4">
+       💍
+      </div>
+      <h3 class="font-display text-xl mb-2" style="color: #D4A853;">Wedding &amp; Engagement</h3>
+      <p class="text-gray-400 text-sm">Elegant decor and full coordination for your dream celebration.</p>
+     </div>
+     <div class="service-card bg-surface rounded-xl p-6 fade-up">
+      <div class="text-4xl mb-4">
+       🏢
+      </div>
+      <h3 class="font-display text-xl mb-2" style="color: #D4A853;">Corporate Events</h3>
+      <p class="text-gray-400 text-sm">Professional planning for launches, meetings, and celebrations.</p>
+     </div>
+     <div class="service-card bg-surface rounded-xl p-6 fade-up">
+      <div class="text-4xl mb-4">
+       🎉
+      </div>
+      <h3 class="font-display text-xl mb-2" style="color: #D4A853;">Private Parties</h3>
+      <p class="text-gray-400 text-sm">House parties, anniversaries, surprise events—fully customized.</p>
+     </div>
+     <div class="service-card bg-surface rounded-xl p-6 fade-up">
+      <div class="text-4xl mb-4">
+       🎨
+      </div>
+      <h3 class="font-display text-xl mb-2" style="color: #D4A853;">Decoration Services</h3>
+      <p class="text-gray-400 text-sm">Balloons, themes, stage setup, lighting, and professional styling.</p>
+     </div>
+     <div class="service-card bg-surface rounded-xl p-6 fade-up">
+      <div class="text-4xl mb-4">
+       ✨
+      </div>
+      <h3 class="font-display text-xl mb-2" style="color: #D4A853;">Custom Experiences</h3>
+      <p class="text-gray-400 text-sm">Bring your unique ideas to life with our creative expertise.</p>
+     </div>
+    </div>
+   </div>
+  </section><!-- Gallery Section -->
+  <section id="gallery" class="w-full py-16 sm:py-20 px-4 sm:px-6 bg-surface/30">
+   <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-12 fade-up">
+     <h2 class="font-display text-3xl sm:text-4xl mb-2" style="color: #D4A853;">📸 Our Work</h2>
+     <p class="text-gray-400 text-sm sm:text-base">Beautiful moments from celebrations we've created</p>
+    </div>
+    <div class="grid grid-cols-2 lg:grid-cols-3 gap-4" id="galleryGrid"></div>
+   </div>
+  </section><!-- Lightbox -->
+  <div class="lightbox" id="lightbox">
+   <button class="lightbox-btn" style="left: 16px;" onclick="changeSlide(-1)">‹</button> <img id="lightboxImg" src="" alt="Gallery image" loading="lazy" onerror="this.style.background='#2A2A2A'; this.alt='Image unavailable';"> <button class="lightbox-btn" style="right: 16px;" onclick="changeSlide(1)">›</button> <button onclick="closeLightbox()" style="position: absolute; top: 20px; right: 20px; background: none; border: none; color: #D4A853; font-size: 2rem; cursor: pointer;">✕</button>
+   <div id="lightboxCounter" style="position: absolute; bottom: 20px; color: #D4A853; font-size: 0.9rem;"></div>
+  </div><!-- Why Us Section -->
+  <section id="why" class="w-full py-16 sm:py-20 px-4 sm:px-6">
+   <div class="max-w-5xl mx-auto">
+    <div class="text-center mb-12 fade-up">
+     <h2 class="font-display text-3xl sm:text-4xl mb-2" style="color: #D4A853;">✨ Why Choose Us?</h2>
+     <p class="text-gray-400 text-sm sm:text-base">Industry-leading excellence and customer satisfaction</p>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+     <div class="bg-surface rounded-xl p-6 text-center fade-up">
+      <div class="text-3xl mb-3">
+       ✔️
+      </div>
+      <h3 class="font-display mb-2" style="color: #D4A853;">Complete Solution</h3>
+      <p class="text-gray-400 text-sm">End-to-end planning and execution</p>
+     </div>
+     <div class="bg-surface rounded-xl p-6 text-center fade-up">
+      <div class="text-3xl mb-3">
+       🎨
+      </div>
+      <h3 class="font-display mb-2" style="color: #D4A853;">Creative Ideas</h3>
+      <p class="text-gray-400 text-sm">Trendy &amp; unique decorations</p>
+     </div>
+     <div class="bg-surface rounded-xl p-6 text-center fade-up">
+      <div class="text-3xl mb-3">
+       💰
+      </div>
+      <h3 class="font-display mb-2" style="color: #D4A853;">Affordable</h3>
+      <p class="text-gray-400 text-sm">Budget-friendly packages</p>
+     </div>
+     <div class="bg-surface rounded-xl p-6 text-center fade-up">
+      <div class="text-3xl mb-3">
+       ⏰
+      </div>
+      <h3 class="font-display mb-2" style="color: #D4A853;">On-Time Delivery</h3>
+      <p class="text-gray-400 text-sm">Reliable setup &amp; execution</p>
+     </div>
+     <div class="bg-surface rounded-xl p-6 text-center fade-up">
+      <div class="text-3xl mb-3">
+       🤝
+      </div>
+      <h3 class="font-display mb-2" style="color: #D4A853;">Personalized Service</h3>
+      <p class="text-gray-400 text-sm">Tailored to your vision</p>
+     </div>
+     <div class="bg-surface rounded-xl p-6 text-center fade-up">
+      <div class="text-3xl mb-3">
+       ⭐
+      </div>
+      <h3 class="font-display mb-2" style="color: #D4A853;">Quality First</h3>
+      <p class="text-gray-400 text-sm">Customer satisfaction guaranteed</p>
+     </div>
+    </div>
+   </div>
+  </section><!-- Stats Section -->
+  <section class="w-full py-16 sm:py-20 px-4 sm:px-6 bg-surface/50">
+   <div class="max-w-5xl mx-auto">
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-6">
+     <div class="stat-box">
+      <div class="font-display text-3xl sm:text-4xl mb-2" style="color: #D4A853;">
+       500+
+      </div>
+      <p class="text-gray-400 text-sm">Events Completed</p>
+     </div>
+     <div class="stat-box">
+      <div class="font-display text-3xl sm:text-4xl mb-2" style="color: #D4A853;">
+       2K+
+      </div>
+      <p class="text-gray-400 text-sm">Happy Clients</p>
+     </div>
+     <div class="stat-box">
+      <div class="font-display text-3xl sm:text-4xl mb-2" style="color: #D4A853;">
+       8+
+      </div>
+      <p class="text-gray-400 text-sm">Years Experience</p>
+     </div>
+     <div class="stat-box">
+      <div class="font-display text-3xl sm:text-4xl mb-2" style="color: #D4A853;">
+       100%
+      </div>
+      <p class="text-gray-400 text-sm">Satisfaction Rate</p>
+     </div>
+    </div>
+   </div>
+  </section><!-- Reviews Section -->
+  <section id="reviews" class="w-full py-16 sm:py-20 px-4 sm:px-6">
+   <div class="max-w-5xl mx-auto">
+    <div class="text-center mb-12 fade-up">
+     <h2 class="font-display text-3xl sm:text-4xl mb-2" style="color: #D4A853;">💬 Client Reviews</h2>
+     <p class="text-gray-400 text-sm sm:text-base">Real feedback from happy clients</p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+     <div class="bg-surface rounded-xl p-6 fade-up border-l-4" style="border-left-color: #D4A853;">
+      <p class="text-gray-300 italic text-sm mb-4">"Great decoration and perfect management. Highly recommended!"</p>
+      <div class="flex items-center gap-2">
+       <span style="color: #D4A853;">⭐⭐⭐⭐⭐</span> <span class="text-xs text-gray-500">Priya Sharma</span>
+      </div>
+     </div>
+     <div class="bg-surface rounded-xl p-6 fade-up border-l-4" style="border-left-color: #D4A853;">
+      <p class="text-gray-300 italic text-sm mb-4">"Everything was handled professionally. Loved the setup!"</p>
+      <div class="flex items-center gap-2">
+       <span style="color: #D4A853;">⭐⭐⭐⭐⭐</span> <span class="text-xs text-gray-500">Rajesh Kumar</span>
+      </div>
+     </div>
+     <div class="bg-surface rounded-xl p-6 fade-up border-l-4" style="border-left-color: #D4A853;">
+      <p class="text-gray-300 italic text-sm mb-4">"Best event planner in Hyderabad for budget-friendly services."</p>
+      <div class="flex items-center gap-2">
+       <span style="color: #D4A853;">⭐⭐⭐⭐⭐</span> <span class="text-xs text-gray-500">Anita Reddy</span>
+      </div>
+     </div>
+    </div>
+   </div>
+  </section><!-- Process Section -->
+  <section class="w-full py-16 sm:py-20 px-4 sm:px-6 bg-surface/30">
+   <div class="max-w-5xl mx-auto">
+    <div class="text-center mb-12 fade-up">
+     <h2 class="font-display text-3xl sm:text-4xl mb-2" style="color: #D4A853;">🎯 How We Work</h2>
+     <p class="text-gray-400 text-sm sm:text-base">Our 4-step process to your perfect event</p>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+     <div class="text-center fade-up">
+      <div class="w-14 h-14 rounded-full mx-auto mb-4 flex items-center justify-center text-2xl" style="background: rgba(212, 168, 83, 0.15); border: 2px solid #D4A853;">
+       1
+      </div>
+      <h3 class="font-display mb-2" style="color: #D4A853;">Consultation</h3>
+      <p class="text-gray-400 text-sm">Discuss your vision and budget</p>
+     </div>
+     <div class="text-center fade-up">
+      <div class="w-14 h-14 rounded-full mx-auto mb-4 flex items-center justify-center text-2xl" style="background: rgba(212, 168, 83, 0.15); border: 2px solid #D4A853;">
+       2
+      </div>
+      <h3 class="font-display mb-2" style="color: #D4A853;">Planning</h3>
+      <p class="text-gray-400 text-sm">Create custom designs &amp; themes</p>
+     </div>
+     <div class="text-center fade-up">
+      <div class="w-14 h-14 rounded-full mx-auto mb-4 flex items-center justify-center text-2xl" style="background: rgba(212, 168, 83, 0.15); border: 2px solid #D4A853;">
+       3
+      </div>
+      <h3 class="font-display mb-2" style="color: #D4A853;">Confirmation</h3>
+      <p class="text-gray-400 text-sm">Finalize and receive quote</p>
+     </div>
+     <div class="text-center fade-up">
+      <div class="w-14 h-14 rounded-full mx-auto mb-4 flex items-center justify-center text-2xl" style="background: rgba(212, 168, 83, 0.15); border: 2px solid #D4A853;">
+       4
+      </div>
+      <h3 class="font-display mb-2" style="color: #D4A853;">Execution</h3>
+      <p class="text-gray-400 text-sm">We set up &amp; manage everything</p>
+     </div>
+    </div>
+   </div>
+  </section><!-- Pricing Section -->
+  <section class="w-full py-16 sm:py-20 px-4 sm:px-6">
+   <div class="max-w-5xl mx-auto">
+    <div class="text-center mb-12 fade-up">
+     <h2 class="font-display text-3xl sm:text-4xl mb-2" style="color: #D4A853;">💰 Packages</h2>
+     <p class="text-gray-400 text-sm sm:text-base">Choose what works best for you</p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+     <div class="bg-surface rounded-xl p-6 fade-up border border-accent/20 hover:border-accent transition">
+      <h3 class="font-display text-xl mb-2" style="color: #D4A853;">🎈 Basic</h3>
+      <p class="text-gray-400 text-sm mb-4">Small gatherings</p>
+      <div class="text-3xl font-display mb-4" style="color: #D4A853;">
+       ₹5K+
+      </div>
+      <ul class="text-gray-400 text-sm space-y-2 mb-6">
+       <li>✓ Basic Decoration</li>
+       <li>✓ Theme Setup</li>
+       <li>✓ 4-6 Hour Event</li>
+       <li>✓ Up to 30 People</li>
+      </ul><button class="w-full btn-primary py-2 rounded-lg text-sm font-semibold">Get Quote</button>
+     </div>
+     <div class="bg-surface rounded-xl p-6 fade-up border-2" style="border-color: #D4A853; position: relative;">
+      <div class="absolute -top-3 left-1/2 transform -translate-x-1/2 px-3 py-1 rounded-full text-xs font-bold bg-accent text-darkBg">
+       POPULAR
+      </div>
+      <h3 class="font-display text-xl mb-2" style="color: #D4A853;">🎉 Premium</h3>
+      <p class="text-gray-400 text-sm mb-4">Most events</p>
+      <div class="text-3xl font-display mb-4" style="color: #D4A853;">
+       ₹15K+
+      </div>
+      <ul class="text-gray-400 text-sm space-y-2 mb-6">
+       <li>✓ Full Decoration</li>
+       <li>✓ Professional Setup</li>
+       <li>✓ 8-10 Hour Event</li>
+       <li>✓ 100-150 People</li>
+       <li>✓ Lighting &amp; Sound</li>
+      </ul><button class="w-full btn-primary py-2 rounded-lg text-sm font-semibold">Get Quote</button>
+     </div>
+     <div class="bg-surface rounded-xl p-6 fade-up border border-accent/20 hover:border-accent transition">
+      <h3 class="font-display text-xl mb-2" style="color: #D4A853;">👑 Luxury</h3>
+      <p class="text-gray-400 text-sm mb-4">Grand celebrations</p>
+      <div class="text-3xl font-display mb-4" style="color: #D4A853;">
+       ₹30K+
+      </div>
+      <ul class="text-gray-400 text-sm space-y-2 mb-6">
+       <li>✓ Premium Decor</li>
+       <li>✓ Full-Day Coordination</li>
+       <li>✓ 300+ People</li>
+       <li>✓ Stage &amp; Lighting</li>
+       <li>✓ Photography</li>
+      </ul><button class="w-full btn-primary py-2 rounded-lg text-sm font-semibold">Get Quote</button>
+     </div>
+    </div>
+    <p class="text-gray-400 text-center text-sm mt-8">💡 Custom packages available based on your specific needs</p>
+   </div>
+  </section><!-- CTA Section -->
+  <section class="w-full py-16 sm:py-20 px-4 sm:px-6 bg-surface/50">
+   <div class="max-w-4xl mx-auto text-center fade-up">
+    <h2 class="font-display text-3xl sm:text-4xl mb-6" style="color: #D4A853;">Ready to Plan Your Event?</h2>
+    <p class="text-gray-300 text-base sm:text-lg mb-8 max-w-2xl mx-auto">Get a free consultation and custom quote today. Our team is ready to bring your celebration dreams to life.</p>
+    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+     <a href="#contact" class="btn-primary px-6 sm:px-8 py-3 rounded-lg font-semibold text-sm sm:text-base inline-flex items-center justify-center gap-2"> <i data-lucide="phone" style="width: 20px; height: 20px;"></i> Book Consultation </a> <a href="https://wa.me/917075785481?text=Hi%21%20I%27m%20interested%20in%20your%20event%20planning%20services" target="_blank" rel="noopener noreferrer" class="btn-secondary px-6 sm:px-8 py-3 rounded-lg font-semibold text-sm sm:text-base inline-flex items-center justify-center gap-2"> <i data-lucide="message-circle" style="width: 20px; height: 20px;"></i> Chat on WhatsApp </a>
+    </div>
+   </div>
+  </section><!-- Contact Section -->
+  <section id="contact" class="w-full py-16 sm:py-20 px-4 sm:px-6">
+   <div class="max-w-4xl mx-auto">
+    <div class="text-center mb-10 fade-up">
+     <h2 class="font-display text-3xl sm:text-4xl mb-2" style="color: #D4A853;">📞 Book Your Event</h2>
+     <p class="text-gray-400 text-sm sm:text-base">Fill in your details and we'll reach out on WhatsApp!</p>
+    </div>
+    <form id="leadForm" class="max-w-lg mx-auto space-y-4 fade-up">
+     <div>
+      <label for="fname" class="block text-sm text-gray-400 mb-2">Your Name</label> <input id="fname" type="text" required class="w-full px-4 py-3 rounded-lg bg-surface border border-accent/20 text-white placeholder-gray-500 focus:outline-none focus:border-accent transition text-sm" placeholder="Full Name">
+     </div>
+     <div>
+      <label for="fphone" class="block text-sm text-gray-400 mb-2">Phone Number</label> <input id="fphone" type="tel" required class="w-full px-4 py-3 rounded-lg bg-surface border border-accent/20 text-white placeholder-gray-500 focus:outline-none focus:border-accent transition text-sm" placeholder="Your phone number">
+     </div>
+     <div>
+      <label for="fevent" class="block text-sm text-gray-400 mb-2">Event Type</label> <select id="fevent" required class="w-full px-4 py-3 rounded-lg bg-surface border border-accent/20 text-white focus:outline-none focus:border-accent transition text-sm"> <option value="">Select event type</option> <option style="color: white;">Birthday Party</option> <option style="color: white;">Wedding / Engagement</option> <option style="color: white;">Corporate Event</option> <option style="color: white;">Private Party</option> <option style="color: white;">Decoration Only</option> <option style="color: white;">Other</option> </select>
+     </div>
+     <div>
+      <label for="fdate" class="block text-sm text-gray-400 mb-2">Event Date</label> <input id="fdate" type="date" class="w-full px-4 py-3 rounded-lg bg-surface border border-accent/20 text-white focus:outline-none focus:border-accent transition text-sm">
+     </div>
+     <div>
+      <label for="fmsg" class="block text-sm text-gray-400 mb-2">Message (Optional)</label> <textarea id="fmsg" rows="3" class="w-full px-4 py-3 rounded-lg bg-surface border border-accent/20 text-white placeholder-gray-500 focus:outline-none focus:border-accent transition text-sm" placeholder="Tell us about your event..."></textarea>
+     </div><button type="submit" class="w-full btn-primary py-4 rounded-lg font-semibold text-sm sm:text-base transition">Send on WhatsApp 📩</button>
+    </form>
+    <div id="formSuccess" class="hidden max-w-lg mx-auto text-center py-8">
+     <span class="text-5xl block mb-4">✅</span>
+     <p class="text-lg font-semibold" style="color: #D4A853;">Redirecting to WhatsApp...</p>
+    </div>
+   </div>
+  </section><!-- Footer -->
+  <footer class="w-full py-12 sm:py-16 px-4 sm:px-6 bg-surface/50 border-t border-accent/10">
+   <div class="max-w-6xl mx-auto">
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-8 sm:gap-12 mb-8">
+     <!-- Brand Column -->
+     <div>
+      <p class="text-2xl mb-2">🎉</p>
+      <p id="footerBrand" class="font-display text-lg mb-2" style="color: #D4A853;">Partyhouse</p>
+      <p class="text-gray-400 text-sm leading-relaxed">Your trusted celebration partner since 2016. Making memories with creativity and professionalism.</p>
+      <div class="flex gap-3 mt-4">
+       <a href="https://wa.me/917075785481" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-full flex items-center justify-center" style="background: #D4A853; color: #0F0F0F; transition: transform 0.3s;">
+        <svg viewbox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.67-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.076 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421-7.403h-.004a9.87 9.87 0 00-4.781 1.226l-.308.156-3.19-.837 1.073 3.282-.214.338a9.466 9.466 0 00-.713 5.73c.289 1.814 1.099 3.514 2.374 4.822 1.274 1.309 2.914 2.211 4.694 2.554 1.676.309 3.437.007 5.041-.952 1.604-.96 2.894-2.486 3.632-4.3.738-1.814.723-3.779-.044-5.574a9.52 9.52 0 00-2.64-4.144 9.532 9.532 0 00-5.893-2.187z" />
+        </svg></a> <a href="tel:917075785481" class="w-10 h-10 rounded-full flex items-center justify-center" style="background: #D4A853; color: #0F0F0F; transition: transform 0.3s;">
+        <svg viewbox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56-.35-.12-.74-.03-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.86l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.49 0-.78-.06-1.56-.16-2.32 0-.28-.22-.52-.5-.52h-2.5C2.56 2.84 2 3.35 2 3.96c0 9.37 7.53 17 16.93 17 .63 0 1.13-.37 1.13-.88v-2.5c0-.28-.24-.51-.52-.5z" />
+        </svg></a>
+      </div>
+     </div><!-- Quick Links -->
+     <div>
+      <h3 class="font-display mb-4" style="color: #D4A853;">Quick Links</h3>
+      <ul class="space-y-2 text-sm">
+       <li><a href="#hero" class="text-gray-400 hover:text-accent transition">🏠 Home</a></li>
+       <li><a href="#services" class="text-gray-400 hover:text-accent transition">🎈 Services</a></li>
+       <li><a href="#gallery" class="text-gray-400 hover:text-accent transition">📸 Gallery</a></li>
+       <li><a href="#why" class="text-gray-400 hover:text-accent transition">✨ Why Us</a></li>
+       <li><a href="#reviews" class="text-gray-400 hover:text-accent transition">💬 Reviews</a></li>
+       <li><a href="#contact" class="text-gray-400 hover:text-accent transition">📞 Contact</a></li>
+      </ul>
+     </div><!-- Contact Info -->
+     <div>
+      <h3 class="font-display mb-4" style="color: #D4A853;">Get In Touch</h3>
+      <div class="space-y-3 text-sm">
+       <div>
+        <p class="text-gray-500 text-xs uppercase tracking-wide mb-1">Phone &amp; WhatsApp</p>
+        <p class="text-gray-300"><span class="phoneNum">7075785481</span></p>
+       </div>
+       <div>
+        <p class="text-gray-500 text-xs uppercase tracking-wide mb-1">Location</p>
+        <p id="footerAddress" class="text-gray-400">📍 Kismatpur Rd, Bandlaguda Jagir, Hyderabad, Telangana 500086</p>
+       </div>
+       <div>
+        <p class="text-gray-500 text-xs uppercase tracking-wide mb-1">Hours</p>
+        <p class="text-gray-400">Mon-Sun: 9:00 AM - 9:00 PM</p>
+       </div>
+      </div>
+     </div>
+    </div><!-- Divider -->
+    <div style="border-top: 1px solid rgba(212, 168, 83, 0.2); margin: 24px 0;"></div><!-- Bottom Footer -->
+    <div class="flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left text-xs text-gray-500">
+     <p>© 2024 Partyhouse And Eventplanner. All rights reserved.</p>
+     <p>Crafted with 💙 for celebrations in Hyderabad</p>
+    </div>
+   </div>
+  </footer><!-- WhatsApp Float Button --> <a id="waFloat" class="whatsapp-btn pulse" href="https://wa.me/917075785481" target="_blank" rel="noopener noreferrer">
+   <svg viewbox="0 0 32 32" width="32" height="32" fill="white"><path d="M16.01 2.667A13.28 13.28 0 002.667 15.84a13.15 13.15 0 001.84 6.747L2.667 29.333l7.013-1.813A13.33 13.33 0 0016.01 29.2 13.28 13.28 0 0029.333 15.92 13.28 13.28 0 0016.01 2.667zm0 24.28a11.05 11.05 0 01-5.64-1.547l-.4-.24-4.187 1.093 1.12-4.08-.267-.413A10.96 10.96 0 014.92 15.84 11.05 11.05 0 0116.01 4.92 11.05 11.05 0 0127.08 15.92 11.05 11.05 0 0116.01 26.947zm6.067-8.28c-.333-.167-1.973-.973-2.28-1.08-.307-.12-.527-.167-.747.167s-.867 1.08-1.053 1.307c-.2.213-.387.24-.72.08a9.08 9.08 0 01-2.68-1.653 10.04 10.04 0 01-1.853-2.307c-.2-.333-.02-.52.147-.68.147-.147.333-.387.5-.573.167-.2.213-.333.333-.56.107-.213.053-.4-.027-.56-.08-.167-.747-1.8-1.027-2.467-.267-.64-.547-.56-.747-.56h-.64a1.23 1.23 0 00-.893.413 3.75 3.75 0 00-1.173 2.787 6.51 6.51 0 001.36 3.453c.167.213 2.36 3.6 5.72 5.053.8.347 1.427.547 1.907.707a4.62 4.62 0 002.107.133c.64-.093 1.973-.8 2.253-1.573s.28-1.44.2-1.573c-.093-.147-.333-.24-.667-.4z" />
+   </svg></a>
+  <script>
+const PHONE = '7075785481';
+const GALLERY_IMAGES = [
+  'https://lh3.googleusercontent.com/p/AF1QipOpCDEitVlD3dWt-FGDMAq0l6uC2laeaovs1ylK=s1360-w1360-h1020-rw',
+  'https://lh3.googleusercontent.com/p/AF1QipNyl-J6h9OzFqBpBkQLLkD4LzhdQgJFlBxRDrAQ=s1360-w1360-h1020-rw',
+  'https://lh3.googleusercontent.com/gps-cs-s/APNQkAHzHWM2rrEYDbi9HqLCtD15ekffIZ_MXqgd1NtY0jcOME1XoIZutFiC5-1Hig6eqo7A19wVeARD6vGn-9IsjsM1zN8pHUxZu_5nfV1y9PS_WX67MKaiHR47OV6BvY14fT1Kz7DWYzMB6Us=s1360-w1360-h1020-rw',
+  'https://lh3.googleusercontent.com/p/AF1QipPuAKcLupG7ZzlIYOc15MFgvYmyuveYTSIvCqSj=s1360-w1360-h1020-rw',
+  'https://lh3.googleusercontent.com/gps-cs-s/APNQkAHKUybfxIVSVMGkgzAVEoyUxHwmzF6gueMyDsyp06HRSoMb1LQCuxfctE8FCyo5aPbqxkQJf3XvIi0Xlyr3B1SVS72szOH0X1-5NLll7wtp01z4zMTvB79EtC6HiPxkZ1qT6SRiSXVabc8=s1360-w1360-h1020-rw',
+  'https://lh3.googleusercontent.com/gps-cs-s/APNQkAGh-i_egv_3Wqn2mgA9ZoYU61yNKSKlcARPU9uS52Rmg67AvhVrAecBaTMzfZe013xdiTsX8JlHfev-QO3WTpuhs0YIuHs0b2688ClhEC--s7HwbJQU3EvONfE_bDGtamZ1dsDq3c-sjQdd=s1360-w1360-h1020-rw'
+];
+
+let currentSlide = 0;
+
+// Gallery Grid
+const grid = document.getElementById('galleryGrid');
+GALLERY_IMAGES.forEach((src, i) => {
+  const div = document.createElement('div');
+  div.className = 'overflow-hidden rounded-lg';
+  div.innerHTML = `<img src="${src}" alt="Event gallery ${i+1}" loading="lazy" class="gallery-img w-full h-40 sm:h-48 md:h-56 object-cover" onclick="openLightbox(${i})" onerror="this.style.background='#2A2A2A'; this.alt='Image unavailable';">`;
+  grid.appendChild(div);
+});
+
+// Lightbox Functions
+function openLightbox(i) {
+  currentSlide = i;
+  updateLightbox();
+  document.getElementById('lightbox').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+function changeSlide(d) {
+  currentSlide = (currentSlide + d + GALLERY_IMAGES.length) % GALLERY_IMAGES.length;
+  updateLightbox();
+}
+
+function updateLightbox() {
+  document.getElementById('lightboxImg').src = GALLERY_IMAGES[currentSlide];
+  document.getElementById('lightboxCounter').textContent = `${currentSlide+1} / ${GALLERY_IMAGES.length}`;
+}
+
+document.getElementById('lightbox').addEventListener('click', e => {
+  if (e.target.id === 'lightbox') closeLightbox();
+});
+
+document.addEventListener('keydown', e => {
+  if (!document.getElementById('lightbox').classList.contains('active')) return;
+  if (e.key === 'Escape') closeLightbox();
+  if (e.key === 'ArrowLeft') changeSlide(-1);
+  if (e.key === 'ArrowRight') changeSlide(1);
+});
+
+// Lead Form
+document.getElementById('leadForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const name = document.getElementById('fname').value;
+  const phone = document.getElementById('fphone').value;
+  const event = document.getElementById('fevent').value;
+  const date = document.getElementById('fdate').value;
+  const msg = document.getElementById('fmsg').value;
+  const text = `🎉 *New Event Inquiry*%0A%0A👤 *Name:* ${encodeURIComponent(name)}%0A📞 *Phone:* ${encodeURIComponent(phone)}%0A🎈 *Event:* ${encodeURIComponent(event)}%0A📅 *Date:* ${encodeURIComponent(date||'Not specified')}%0A💬 *Message:* ${encodeURIComponent(msg||'N/A')}`;
+  this.classList.add('hidden');
+  document.getElementById('formSuccess').classList.remove('hidden');
+  setTimeout(() => {
+    window.open(`https://wa.me/91${PHONE}?text=${text}`, '_blank');
+  }, 500);
+});
+
+// Hero Form
+document.getElementById('heroForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const name = document.getElementById('heroName').value;
+  const phone = document.getElementById('heroPhone2').value;
+  const event = document.getElementById('heroEvent').value;
+  const date = document.getElementById('heroDate').value;
+  const text = `🎉 *Quick Event Inquiry*%0A%0A👤 *Name:* ${encodeURIComponent(name)}%0A📞 *Phone:* ${encodeURIComponent(phone)}%0A🎈 *Event:* ${encodeURIComponent(event)}%0A📅 *Date:* ${encodeURIComponent(date||'Not specified')}`;
+  const btn = this.querySelector('button[type="submit"]');
+  btn.disabled = true;
+  btn.textContent = 'Opening WhatsApp...';
+  setTimeout(() => {
+    window.open(`https://wa.me/91${PHONE}?text=${text}`, '_blank');
+    this.reset();
+    btn.disabled = false;
+    btn.textContent = 'Send to WhatsApp 📩';
+  }, 500);
+});
+
+// Mobile Menu
+document.getElementById('mobileMenuBtn').addEventListener('click', () => {
+  document.getElementById('mobileMenu').classList.toggle('hidden');
+});
+
+document.querySelectorAll('#mobileMenu a').forEach(a => {
+  a.addEventListener('click', () => document.getElementById('mobileMenu').classList.add('hidden'));
+});
+
+// Navbar Background on Scroll
+window.addEventListener('scroll', () => {
+  const nav = document.getElementById('mainNav');
+  nav.style.background = window.scrollY > 50 ? 'rgba(15, 15, 15, 0.95)' : 'rgba(15, 15, 15, 0.8)';
+});
+
+// Fade-up Observer
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) e.target.classList.add('visible');
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+
+// Element SDK Configuration
+const defaultConfig = {
+  hero_title: 'Partyhouse And Eventplanner',
+  hero_subtitle: 'Make Every Celebration Memorable',
+  phone_number: '7075785481',
+  address_text: 'Kismatpur Rd, Bandlaguda Jagir, Hyderabad',
+  background_color: '#0F0F0F',
+  surface_color: '#1A1A1A',
+  text_color: '#E5E5E5',
+  accent_color: '#D4A853',
+  secondary_action_color: '#2A2A2A',
+  font_family: 'Playfair Display',
+  font_size: 16
+};
+
+function applyConfig(c) {
+  document.getElementById('heroTitle').textContent = c.hero_title || defaultConfig.hero_title;
+  document.getElementById('heroSubtitle').textContent = c.hero_subtitle || defaultConfig.hero_subtitle;
+  const phone = c.phone_number || defaultConfig.phone_number;
+  document.querySelectorAll('.phoneNum').forEach(el => el.textContent = phone);
+  document.getElementById('waFloat').href = `https://wa.me/91${phone}`;
+  const addr = c.address_text || defaultConfig.address_text;
+  document.getElementById('heroAddress').textContent = '📍 ' + addr;
+  document.getElementById('footerAddress').textContent = '📍 ' + addr;
+
+  const accent = c.accent_color || defaultConfig.accent_color;
+  const bg = c.background_color || defaultConfig.background_color;
+  const surface = c.surface_color || defaultConfig.surface_color;
+
+  document.body.style.background = bg;
+  document.getElementById('heroTitle').style.color = accent;
+  document.getElementById('navBrand').style.color = accent;
+  document.getElementById('footerBrand').style.color = accent;
+
+  const ff = c.font_family || defaultConfig.font_family;
+  document.querySelectorAll('.font-display').forEach(el => el.style.fontFamily = `${ff}, serif`);
+
+  const fs = c.font_size || defaultConfig.font_size;
+  document.getElementById('heroSubtitle').style.fontSize = fs * 1.2 + 'px';
+}
+
+window.elementSdk.init({
+  defaultConfig,
+  onConfigChange: async (config) => applyConfig(config),
+  mapToCapabilities: (config) => ({
+    recolorables: [
+      {
+        get: () => config.background_color || defaultConfig.background_color,
+        set: v => {
+          config.background_color = v;
+          window.elementSdk.setConfig({ background_color: v });
+        }
+      },
+      {
+        get: () => config.surface_color || defaultConfig.surface_color,
+        set: v => {
+          config.surface_color = v;
+          window.elementSdk.setConfig({ surface_color: v });
+        }
+      },
+      {
+        get: () => config.text_color || defaultConfig.text_color,
+        set: v => {
+          config.text_color = v;
+          window.elementSdk.setConfig({ text_color: v });
+        }
+      },
+      {
+        get: () => config.accent_color || defaultConfig.accent_color,
+        set: v => {
+          config.accent_color = v;
+          window.elementSdk.setConfig({ accent_color: v });
+        }
+      }
+    ],
+    borderables: [],
+    fontEditable: {
+      get: () => config.font_family || defaultConfig.font_family,
+      set: v => {
+        config.font_family = v;
+        window.elementSdk.setConfig({ font_family: v });
+      }
+    },
+    fontSizeable: {
+      get: () => config.font_size || defaultConfig.font_size,
+      set: v => {
+        config.font_size = v;
+        window.elementSdk.setConfig({ font_size: v });
+      }
+    }
+  }),
+  mapToEditPanelValues: (config) => new Map([
+    ['hero_title', config.hero_title || defaultConfig.hero_title],
+    ['hero_subtitle', config.hero_subtitle || defaultConfig.hero_subtitle],
+    ['phone_number', config.phone_number || defaultConfig.phone_number],
+    ['address_text', config.address_text || defaultConfig.address_text]
+  ])
+});
+
+lucide.createIcons();
+</script> (); 
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9f1315041062b2d6',t:'MTc3NzAxMjQ2NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html><!-- Nav -->
